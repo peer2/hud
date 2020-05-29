@@ -1,0 +1,598 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:300');
+
+/* ############ MIXINS  ############## */
+
+// neon borders
+@mixin neon-border($color,$rgba,$inset,$x,$y){
+  // $color - border color, $rgba - shadow, $inset - true/false
+  border: 2px solid $color;
+  @if $inset == 'true' {
+    -webkit-box-shadow: 0px 0px $x $y $rgba, inset 0px 0px $x $y $rgba;
+    -moz-box-shadow:    0px 0px $x $y $rgba, inset 0px 0px $x $y $rgba;
+    box-shadow:         0px 0px $x $y $rgba, inset 0px 0px $x $y $rgba;
+  }@else if $inset == 'false'{
+    -webkit-box-shadow: 0px 0px $x $y $rgba;
+    -moz-box-shadow:    0px 0px $x $y $rgba;
+    box-shadow:         0px 0px $x $y $rgba;
+  }
+}
+
+// scan line and opacity effect animation
+@mixin scanOpacity($background){
+
+  // if $background == true  move background if no just animate opacity
+  -webkit-animation: ScanLine 10s ease-in-out infinite;
+  -moz-animation: ScanLine 10s ease-in-out infinite;
+  animation: ScanLine 10s ease-in-out infinite;
+
+  @if $background == "true"{
+    @-webkit-keyframes ScanLine {
+      0%{background-position:51% 0%; opacity: 0.9}
+      10%{opacity: 0.8}
+      20%{opacity: 0.7}
+      30%{opacity: 0.8}
+      40%{opacity: 0.9}
+      50%{background-position:50% 100%;opacity: 1}
+      60%{opacity: 0.9}
+      70%{opacity: 0.6}
+      80%{opacity: 0.9}
+      90%{opacity: 0.8}
+      100%{background-position:51% 0%;opacity: 0.9}
+  }
+    @-moz-keyframes ScanLine {
+      0%{background-position:51% 0%; opacity: 0.9}
+      10%{opacity: 0.8}
+      20%{opacity: 0.7}
+      30%{opacity: 0.8}
+      40%{opacity: 0.9}
+      50%{background-position:50% 100%;opacity: 1}
+      60%{opacity: 0.9}
+      70%{opacity: 0.6}
+      80%{opacity: 0.9}
+      90%{opacity: 0.8}
+      100%{background-position:51% 0%;opacity: 0.9}
+    }
+    @keyframes ScanLine {
+      0%{background-position:51% 0%; opacity: 0.9}
+      10%{opacity: 0.8}
+      20%{opacity: 0.7}
+      30%{opacity: 0.8}
+      40%{opacity: 0.9}
+      50%{background-position:50% 100%;opacity: 1}
+      60%{opacity: 0.9}
+      70%{opacity: 0.6}
+      80%{opacity: 0.9}
+      90%{opacity: 0.8}
+      100%{background-position:51% 0%;opacity: 0.9}
+    }
+}@else{
+
+    @-webkit-keyframes ScanLine {
+       0%{opacity: 0.8}
+       10%{opacity: 0.5;}
+       20%{opacity: 0.9}
+       30%{opacity: 0.7}
+       40%{opacity: 0.9}
+       50%{opacity: 1}
+       60%{opacity: 0.9}
+       70%{opacity: 0.6}
+       80%{opacity: 0.9}
+       90%{opacity: 0.8}
+       100%{opacity: 0.9}
+    }
+    @-moz-keyframes ScanLine {
+      0%{opacity: 0.8}
+      10%{opacity: 0.5}
+      20%{opacity: 0.9}
+      30%{opacity: 0.7}
+      40%{opacity: 0.9}
+      50%{opacity: 1}
+      60%{opacity: 0.9}
+      70%{opacity: 0.6}
+      80%{opacity: 0.9}
+      90%{opacity: 0.8}
+      100%{opacity: 0.9}
+    }
+    @keyframes ScanLine {
+      0%{opacity: 0.8}
+      10%{opacity: 0.5}
+      20%{opacity: 0.9}
+      30%{opacity: 0.7}
+      40%{opacity: 0.9}
+      50%{opacity: 1}
+      60%{opacity: 0.9}
+      70%{opacity: 0.6}
+      80%{opacity: 0.9}
+      90%{opacity: 0.8}
+      100%{opacity: 0.9}
+    }
+  }
+}
+
+// glitch effect
+@mixin glitchEffect(){
+  -webkit-animation: Glitch 10s ease-in-out infinite;
+  -moz-animation: Glitch 10s ease-in-out infinite;
+  animation: Glitch 10s ease-in-out infinite;
+
+  @-webkit-keyframes Glitch {
+    0%{}
+    9.9%{-webkit-transform:skew(0deg);}
+    10%{-webkit-transform:skew(1deg);}
+    10.1%{-webkit-transform:skew(0deg);}
+    89.9%{-webkit-transform:skew(0deg);}
+    90%{-webkit-transform:skew(-4deg);}
+    90.1%{-webkit-transform:skew(0deg);}
+    100%{}
+  }
+  @-moz-keyframes Glitch {
+    0%{}
+    9.9%{-webkit-transform:skew(0deg);}
+    10%{-webkit-transform:skew(1deg);}
+    10.1%{-webkit-transform:skew(0deg);}
+    89.9%{-webkit-transform:skew(0deg);}
+    90%{-webkit-transform:skew(-4deg);}
+    90.1%{-webkit-transform:skew(0deg);}
+    100%{}
+  }
+  @keyframes Glitch {
+    0%{}
+    9.9%{-webkit-transform:skew(0deg);}
+    10%{-webkit-transform:skew(1deg);}
+    10.1%{-webkit-transform:skew(0deg);}
+    89.9%{-webkit-transform:skew(0deg);}
+    90%{-webkit-transform:skew(-4deg);}
+    90.1%{-webkit-transform:skew(0deg);}
+    100%{}
+  }
+}
+
+@mixin cursorBlink($time){
+  -webkit-animation: Blink $time ease infinite;
+  -moz-animation: Blink $time ease infinite;
+  animation: Blink $time ease infinite;
+
+  @-webkit-keyframes Blink {
+     0%{opacity: 0}
+     50%{opacity: 1}
+     100%{opacity: 0}
+  }
+  @-moz-keyframes Blink {
+    0%{opacity: 0}
+    50%{opacity: 1}
+    100%{opacity: 0}
+  }
+  @keyframes Blink {
+    0%{opacity: 0}
+    50%{opacity: 1}
+    100%{opacity: 0}
+  }
+}
+
+// Mixins
+@mixin transform( $transform-props ) {
+  transform: $transform-props;
+  -webkit-transform: $transform-props;
+  -moz-transform: $transform-props;
+  -ms-transform: $transform-props;
+  -o-transform: $transform-props;
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+@mixin absolute ($t: null, $r: null, $b: null, $l: null, $z: null) {
+  top: $t;
+  right: $r;
+  bottom: $b;
+  left: $l;
+  z-index: $z;
+  position: absolute;
+}
+
+@mixin fixed ($t: null, $r: null, $b: null, $l: null, $z: null) {
+  top: $t;
+  right: $r;
+  bottom: $b;
+  left: $l;
+  z-index: $z;
+  position: fixed;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+// Variables
+$black: #000;
+$white: #fff;
+$dark: #333;
+$timing: cubic-bezier(0.17, 0.04, 0.03, 0.94);
+
+// Keyframes
+@include keyframes(color-change-2x) {
+  0% {
+    background: #19dcea;
+  }
+  100% {
+    background: #b22cff;
+  }
+}
+
+@include keyframes(arrow-move) {
+  0% {
+    @include transform(translateY(0));
+  }
+  25% {
+    @include transform(translateY(5px));
+  }
+  75% {
+    @include transform(translateY(-7px));
+  }
+  100% {
+    @include transform(translateY(0));
+  }
+}
+
+@mixin animation( $property, $animation-props ){
+  @if $property == animation {
+    -webkit-animation: $animation-props;
+        -moz-animation: $animation-props;
+        -ms-animation: $animation-props;
+        -o-animation: $animation-props;
+        animation: $animation-props;
+  }
+  @else {
+    -webkit-animation-#{$property}: $animation-props;
+    -moz-animation-#{$property}: $animation-props;
+    -ms-animation-#{$property}: $animation-props;
+    -o-animation-#{$property}: $animation-props;
+    animation--#{$property}: $animation-props;
+  }
+}
+
+
+header {
+  @include fixed($t:0,$l:0,$z:2);
+  padding: 0 30px;
+  height: 60px;
+  width: 100%;
+  background: $dark;
+}
+
+.logo {
+  height: 30px;
+  width: 30px;
+  background: magenta;
+  margin-top: 15px;
+  @include transform(rotate(45deg));
+}
+
+.book-wrapper {
+  width: 100%;
+  @include absolute($b:0);
+  height: 300px;
+  overflow: hidden;
+}
+
+#book-toggle {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance:none;
+  cursor:pointer;
+  border-radius: 20px;
+  @include absolute($l:-100%,$t:-100%);
+}
+
+#book-toggle + label {
+  @include absolute($l:50%, $b:0, $z:100);
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-align: center;
+  color: #ddd;
+  background: #2f2f2f;
+  width: 500px;
+  margin: 0;
+  padding: 15px 0 15px 0;
+  cursor: pointer;
+  @include border-radius(2px 2px 0 0);
+  @include transform(translateX(-50%));
+  @include transition(all 300ms $timing);
+  &::before {
+    content: '';
+    height: 1px;
+    // background: #ddd;
+    @include absolute($t:50%);
+    width: 0;
+    @include transition(width .6s linear .2s);
+  }
+  &:hover {
+    color: #FFF;
+  }
+}
+
+.glow {
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #00b6e6, 0 0 4px #00b6e6, 0 0 5px #00b6e6, 0 0 6px #00b6e6, 0 0 7px #00b6e6;
+  }
+  to {
+    text-shadow: 0 0 2px #fff, 0 0 3px #00d6e6, 0 0 4px #00d6e6, 0 0 5px #00d6e6, 0 0 6px #00d6e6, 0 0 7px #00d6e6, 0 0 8px #00d6e6;
+  }
+}
+
+.book-now {
+  @include glitchEffect();
+  background: #2f2f2f;
+  height: 200px;
+  font-family: Consolas,monaco,monospace; 
+  @include absolute($b:-240px, $z:100);
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+  padding: 30px 0;
+  @include transition(bottom 300ms $timing);
+  overflow: hidden;
+}
+
+form > .container .row {
+  margin-bottom: 10px;
+}
+
+form label {
+  text-align: right;
+  color: #aaa;
+}
+
+.fa {
+  color: #888;
+}
+
+.actually {
+  color: #aaa;
+  text-align: center;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 3px;
+  @include transition(color .3s $timing .8s);
+}
+
+.btn-primary {
+  background-color: magenta;
+  border-color: magenta;
+  font-size: 20px;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  @include transition(all 300ms $timing);
+  &:hover {
+    background-color: purple;
+    border-color: purple;
+  }
+}
+
+#book-toggle:checked {
+  ~ .book-now {
+    bottom: 0;
+    .actually {
+      color: #2f2f2f;
+    }
+  }
+  + label {
+    bottom: 240px;
+    @include border-radius(50px 50px 0 0);
+    &::before {
+      width: 440px;
+    }
+  }
+}
+
+
+/* ############ END/MIXINS  ############## */
+
+/* ############ COLORS  ############## */
+
+$bukner : #141f23;
+$black-pearl : #051D29;
+$spray: #93EDF5;
+$picton-blue: #4BA0E3;
+$iceberg:#d9f2f4;
+$dairy-cream:#F7E3AF;
+$blosom: #D4AFB9;
+$burnt-siennaRGBA:rgba(240, 93, 94, 0.78);
+$cream-canRGBA: rgba(239, 199, 97, 0.78);
+$curious-blueRGBA: rgba(16, 81, 139, 0.78);
+$aquaRGBA: rgba(0, 255, 255, 0.83);
+
+
+/* ############ END/COLORS  ############## */
+
+/* ############ TYPOGRAPHY  ############## */
+
+h1{
+  font-family: 'Black Ops One', cursive;
+  font-size: 18px;
+/*  @include media('>=tablet'){
+    font-size: 22px;
+  }*/
+  margin: 10px;
+}
+
+h2{
+  font-family: 'Black Ops One', cursive;
+  font-size: 30px;
+  margin: 10px;
+}
+
+// links
+a{
+  color: $iceberg;
+  text-decoration: none;
+  transition: all 1s ease;
+
+  // square brackets
+  &.brackets{
+    padding-bottom: 2px;
+    &::before{
+      content:'[ ';
+    }
+    &::after{
+      content:' ]';
+    }
+  }
+  &:hover, &:active, &:focus{
+    background: $iceberg;
+    color: black;
+  }
+}
+
+/* ############ END/TYPOGRAPHY  ############## */
+
+/* ############ BUTTONS  ############## */
+
+.btn{
+  padding: 5px;
+  margin: 5px;
+  color:black;
+  background: $spray;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: none;
+  font-weight: bold;
+
+  // neon border effect
+  @include neon-border($spray,$curious-blueRGBA,'false',4px,2px);
+
+  &:hover{
+    background: transparent;
+    color: $spray;
+    text-shadow: 0px 0px 5px $aquaRGBA;
+  }
+
+}
+
+/* ############ END/BUTTONS  ############## */
+
+/* ############ BASE  ############## */
+
+body{
+
+/*  @include media('>tablet'){
+    background:$black-pearl url('https://markostefanovic.github.io/random-quote-generator/images/back.png') repeat 300% 300% ;
+
+    @include scanOpacity('true');
+  }*/
+}
+
+//neon border
+.border{
+  &.blue{
+    @include neon-border($picton-blue,$curious-blueRGBA,'true',4px,2px);
+  }
+  &.red{
+    @include neon-border($blosom,$burnt-siennaRGBA,'false',2px,1px);
+  }
+
+}
+
+.cursor{
+  color: $spray;
+  background: transparent;
+  text-shadow: 0px 0px 5px $aquaRGBA;
+
+  // blinking cursor animation
+  @include cursorBlink(2s);
+}
+
+.float-left{
+  float:left;
+
+}
+.clear{
+  clear: both;
+}
+/* ############ END/BASE  ############## */
+
+/* ############ CONTAINER  ############## */
+
+.container{
+  max-width: 800px;
+  margin: 0 auto;
+  min-width: 300px;
+
+  .wrapper{
+    padding: 2px;
+
+    // glitch effect
+    @include glitchEffect();
+
+  }
+}
+
+/* ############ END/CONTAINER  ############## */
+
+
+/* ############ END/MEMORY MODULE  ############## */
+
